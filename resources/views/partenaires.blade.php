@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -422,4 +423,309 @@ a {
     document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
   </script>
 </body>
+=======
+<!doctype html>
+<html lang="fr">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>NANA RAFF — Partenariat</title>
+    <style>
+        :root {
+            --primary-color: #27ae60;
+            --secondary-color: #2c3e50;
+            --background-color: #ecf0f1;
+            --text-color: #2c3e50;
+            --muted: #7f8c8d;
+            --glass: rgba(255, 255, 255, 0.65);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+        }
+
+        html,
+        body {
+            height: 100%;
+            background: var(--background-color);
+            color: var(--text-color);
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        header {
+            position: relative;
+            z-index: 30;
+            background: linear-gradient(90deg, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.6));
+            backdrop-filter: blur(6px);
+            box-shadow: 0 6px 18px rgba(44, 62, 80, 0.08);
+        }
+
+        .nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 18px 20px;
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            justify-content: space-between;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transform: translateY(-2px);
+        }
+
+        .logo-img {
+            width: 60px;
+            height: auto;
+            border-radius: 30%;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            list-style: none;
+        }
+
+        nav li {
+            padding: 8px 12px;
+            border-radius: 8px;
+            color: var(--muted);
+            font-weight: 600;
+        }
+
+        nav li:hover {
+            color: var(--secondary-color);
+            background: rgba(44, 62, 80, 0.03);
+        }
+
+        main {
+            max-width: 1200px;
+            margin: 80px auto 80px;
+            padding: 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 28px;
+            margin-bottom: 12px;
+            color: var(--secondary-color);
+        }
+
+        .sub {
+            text-align: center;
+            margin-bottom: 32px;
+            color: var(--muted);
+        }
+
+        .partner-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        @media(max-width:900px) {
+            .partner-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .partner-info {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            background: white;
+            padding: 24px;
+            border-radius: 14px;
+            box-shadow: 0 10px 30px rgba(44, 62, 80, 0.06);
+        }
+
+        .partner-info h3 {
+            margin-bottom: 6px;
+            color: var(--secondary-color);
+        }
+
+        .partner-info p {
+            color: var(--muted);
+        }
+
+        .partner-info img {
+            width: 100%;
+            border-radius: 12px;
+            object-fit: cover;
+        }
+
+        form.partner-form {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            background: white;
+            padding: 24px;
+            border-radius: 14px;
+            box-shadow: 0 10px 30px rgba(44, 62, 80, 0.06);
+        }
+
+        form input,
+        form textarea {
+            padding: 12px;
+            border-radius: 10px;
+            border: 1px solid rgba(44, 62, 80, 0.1);
+            font-size: 14px;
+            outline: none;
+        }
+
+        form textarea {
+            resize: none;
+            height: 140px;
+        }
+
+        .btn {
+            background: var(--primary-color);
+            color: white;
+            padding: 12px 18px;
+            border-radius: 10px;
+            font-weight: 700;
+            border: 0;
+            cursor: pointer;
+            transition: transform .18s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        footer {
+            background: #0b1220;
+            color: #cbd5e1;
+            margin-top: 30px;
+            padding: 20px;
+        }
+
+        footer a {
+            color: #e2e8f0;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 18px;
+            padding: 26px 0;
+        }
+
+        @media(max-width:820px) {
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .copyright {
+            border-top: 1px solid rgba(255, 255, 255, .08);
+            padding: 12px 0;
+            color: #94a3b8;
+        }
+    </style>
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+</head>
+
+<body>
+
+    <!-- HEADER -->
+@include('layout.header')
+
+
+    <main>
+        <h2>Devenez partenaire NANA RAFF</h2>
+        <div class="sub">Rejoignez notre réseau et bénéficiez d’opportunités uniques pour votre entreprise ou projet.
+        </div>
+
+        <div class="partner-grid">
+            <!-- Section d'information -->
+            <div class="partner-info">
+                <h3>Pourquoi devenir partenaire ?</h3>
+                <p>En rejoignant NANA RAFF, vous bénéficiez de :</p>
+                <ul style="color:var(--muted);margin-left:16px;">
+                    <li>Visibilité accrue de vos produits/services</li>
+                    <li>Accès à notre réseau de clients premium</li>
+                    <li>Opportunités de co-marketing et événements exclusifs</li>
+                    <li>Support personnalisé pour maximiser votre impact</li>
+                </ul>
+                <img src="https://th.bing.com/th/id/OIP.mncoKq4PjzL7VaP07a-_VgHaDV?w=346&h=157&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3"
+                    alt="Partenariat illustration">
+            </div>
+
+            <!-- Formulaire de partenariat -->
+            <form class="partner-form" id="partnerForm">
+                <h3>Envoyer une demande de partenariat</h3>
+                <input type="text" id="partnerName" placeholder="Nom de votre entreprise" required>
+                <input type="email" id="partnerEmail" placeholder="Email" required>
+                <input type="text" id="partnerSubject" placeholder="Sujet" required>
+                <textarea id="partnerMessage" placeholder="Votre message / proposition" required></textarea>
+                <button type="submit" class="btn">Envoyer la demande</button>
+            </form>
+        </div>
+    </main>
+
+@include('layout.footer')
+
+    <script>
+
+        document.getElementById('partnerForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            alert('Merci pour votre demande de partenariat ! Nous vous contacterons rapidement.');
+            this.reset();
+        });
+
+        // ---------- Responsive Menu Toggle ----------
+        var menuToggle = document.getElementById('menuToggle');
+        const menu = document.querySelector('.menu');
+
+        if (menuToggle && menu) {
+            menuToggle.addEventListener('click', () => {
+                menu.classList.toggle('open');
+            });
+
+            // Close menu when a link is clicked (for single-page navigation)
+            menu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    menu.classList.remove('open');
+                });
+            });
+        }
+
+
+
+        // Responsive menu toggle
+        menuToggle = document.getElementById('menuToggle');
+        const menuResponsive = document.getElementById('menuResponsive');
+
+        if (menuToggle && menuResponsive) {
+            menuToggle.addEventListener('click', () => {
+                menuResponsive.classList.toggle('open');
+            });
+
+            // Close responsive menu when a link is clicked
+            menuResponsive.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    menuResponsive.classList.remove('open');
+                });
+            });
+        }
+    </script>
+
+</body>
+
+>>>>>>> 4ab2363a34920e1e831fd0cf354750876d32af69
 </html>

@@ -7,7 +7,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Str;
+<<<<<<< HEAD
 
+=======
+>>>>>>> 4ab2363a34920e1e831fd0cf354750876d32af69
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
@@ -33,6 +36,19 @@ class User extends Authenticatable
         });
     }
 
+<<<<<<< HEAD
+=======
+    public function publications()
+    {
+        return $this->hasMany(Publication::class);
+    }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
+
+>>>>>>> 4ab2363a34920e1e831fd0cf354750876d32af69
     /**
      * The attributes that should be hidden for serialization.
      *
