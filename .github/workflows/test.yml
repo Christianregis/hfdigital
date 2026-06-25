@@ -1,0 +1,27 @@
+name: TEST SIMPLE AUTOMATISATION CI
+on: 
+  push:
+    branches: [main, develop] 
+  pull_request:
+    branches: [main, develop]
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: Build code
+        run: composer install
+      - name: Checking if code is built
+        run: echo "Build Successful"
+      - name: Optmise code
+        run: php artisan optimize:clear
+      - name: Set Up Node Module
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Install Node Module
+        run: npm install
+      - name: Build FrontEnd
+        run: npm run build
+
+      
