@@ -13,8 +13,6 @@ jobs:
         run: composer install
       - name: Checking if code is built
         run: echo "Build Successful"
-      - name: Optmise code
-        run: php artisan optimize:clear
       - name: Set Up Node Module
         uses: actions/setup-node@v4
         with:
