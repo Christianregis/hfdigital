@@ -8,7 +8,8 @@ jobs:
   build-and-test:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v6
       - name: Verification du code
-      - use: actions/checkout@v6
+        run: echo "Verification..."
       - name: Validation du code
-      - run: echo "Verification ..."
+        run: echo "Verification ..."
