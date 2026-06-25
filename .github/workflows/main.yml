@@ -1,15 +1,67 @@
-name: ESSAIE GITHUB ACTION
-on: 
-  push: 
+name: HF Digital — CI Pipeline
+
+on:
+  push:
     branches: [main, develop]
-  pull_request: 
-    branches: [main, develop]
+  pull_request:
+    branches: [main]
+
 jobs:
-  build-and-test:
+  tests:
+    name: Tests automatisés
     runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_DB: hfdigital_test
+          POSTGRES_USER: ${{ secrets.DB_USERNAME }}
+          POSTGRES_PASSWORD: ${{ secrets.DB_PASSWORD }}
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
     steps:
-      - uses: actions/checkout@v6
-      - name: Verification du code
-        run: echo "Verification..."
-      - name: Validation du code
-        run: echo "Verification ..."
+      - name: Checkout du code
+        uses: actions/checkout@v4
+
+      - name: Setup PHP 8.2
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.2"
+          extensions: pdo, pdo_pgsql
+          coverage: none
+
+      - name: Installer les dépendances PHP
+        run: composer install --no-dev --optimize-autoloader --no-interaction
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Installer les dépendances JS
+        run: npm ci
+
+      - name: Préparer le .env de test
+        run: |
+          cp .env.example .env
+          php artisan key:generate
+          sed -i 's/DB_CONNECTION=.*/DB_CONNECTION=pgsql/' .env
+          sed -i 's/DB_HOST=.*/DB_HOST=127.0.0.1/' .env
+          sed -i 's/DB_PORT=.*/DB_PORT=5432/' .env
+          sed -i 's/DB_DATABASE=.*/DB_DATABASE=hfdigital_test/' .env
+          sed -i 's/DB_USERNAME=.*/DB_USERNAME=${{ secrets.DB_USERNAME }}/' .env
+          sed -i 's/DB_PASSWORD=.*/DB_PASSWORD=${{ secrets.DB_PASSWORD }}/' .env
+
+      - name: Lancer les migrations
+        run: php artisan migrate --force
+
+      - name: Lancer les tests
+        run: php artisan test

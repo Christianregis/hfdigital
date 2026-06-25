@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: hfdigital-service
+  namespace: hfdigital
+spec:
+  selector:
+    app: hfdigital
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 9000
+  type: NodePort
