@@ -16,7 +16,7 @@ jobs:
       - name: Optmise code
         run: php artisan optimize:clear
       - name: Set Up Node Module
-        uses: actions/setup-nodesv4
+        uses: actions/setup-node@v4
         with:
           node-version: '20'
       - name: Install Node Module
