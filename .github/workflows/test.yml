@@ -1,0 +1,15 @@
+name: TEST SIMPLE AUTOMATISATION CI
+on: 
+  push:
+    branches: [main, develop] 
+  pull_request:
+    branches: [main, develop]
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: Build code
+        run: composer install
+      - name: Optmise code
+        run: php artisan optimise:clear
