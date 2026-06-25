@@ -1,0 +1,14 @@
+name: ESSAIE GITHUB ACTION
+on: 
+  push: 
+    branches: [main, develop]
+  pull_request: 
+    branches: [main, develop]
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Verification du code
+      - use: actions/checkout@v6
+      - name: Validation du code
+      - run: echo "Verification ..."
