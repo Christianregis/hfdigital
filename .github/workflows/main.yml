@@ -61,7 +61,9 @@ jobs:
           sed -i 's/DB_PASSWORD=.*/DB_PASSWORD=regis@2007/' .env
       - name: Attendre que PostgreSQL soit prêt
         run: |
-          until pg_isready -h 127.0.0.1 -p 5432 -U postgres
+          until pg_isready -h 127.0.0.1 -p 5432 -U postgres; do
+            sleep 2
+          done
       - name: Lancer les migrations
         run: php artisan migrate --force
 
