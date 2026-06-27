@@ -1,199 +1,375 @@
-# HFDigital
+# HF Digital
 
-## 📌 Présentation du projet
+HF Digital est une plateforme web développée avec **Laravel 10**, **HTML**, **CSS** et **JavaScript**. Elle offre une architecture moderne, une interface responsive et un environnement de développement entièrement conteneurisé grâce à **Docker**.
 
-**HFDigital** est une application **web full-stack** orientée digitalisation des services et gestion moderne des activités numériques. Le projet vise à offrir une plateforme fiable, évolutive et professionnelle permettant de centraliser des fonctionnalités clés autour du numérique (gestion, visibilité en ligne, automatisation).
-
-HFDigital est conçu comme un projet structuré, respectant les bonnes pratiques du développement web et prêt à évoluer vers un déploiement à grande échelle.
-
----
-
-## 🎯 Objectifs du projet
-
-* Digitaliser des processus et services traditionnels
-* Proposer une plateforme web moderne et intuitive
-* Mettre en pratique une architecture full-stack propre
-* Faciliter la maintenance et l’évolution du système
-
----
-
-## 🛠️ Technologies utilisées
+## 🚀 Technologies utilisées
 
 ### Backend
-
-* **PHP – Laravel** (Framework MVC)
-* **MySQL** – Base de données relationnelle
+- Laravel 10
+- PHP 8.2
+- PostgreSQL
+- Composer
 
 ### Frontend
+- HTML5
+- CSS3
+- JavaScript
+- Vite
+- NPM
 
-* **HTML5 / CSS3**
-* **JavaScript**
-* **Blade** (moteur de templates Laravel)
-* **Bootstrap CSS**
-
-### Outils & Environnement
-
-* **Git & GitHub** – Gestion de versions
-* **Composer** – Dépendances PHP
-* **Node.js & NPM** – Assets frontend
-* **XAMPP / WAMP / Laragon** – Serveur local
-* **Visual Studio Code** – Éditeur recommandé
+### DevOps
+- Docker
+- Docker Compose
+- Nginx
+- GitHub Actions (CI)
 
 ---
 
-## 📂 Structure du projet
+# 📁 Structure du projet
 
-```text
-hfdigital/
-├── app/                # Logique métier
+```
+.
+├── app/
 ├── bootstrap/
 ├── config/
-├── database/           # Migrations et seeders
-├── public/             # Fichiers publics
-├── resources/          # Vues et assets
-├── routes/             # Routes web et API
+├── database/
+├── docker/
+│   └── nginx/
+├── public/
+├── resources/
+├── routes/
 ├── storage/
 ├── tests/
-├── .env.example
+├── Dockerfile
+├── docker-compose.yml
 ├── composer.json
+├── package.json
 └── README.md
 ```
 
 ---
 
-## ⚙️ Prérequis
+# ⚙️ Prérequis
 
-Avant de commencer, assure-toi d’avoir installé :
+Avant de commencer, assurez-vous d'avoir installé :
 
-* **PHP >= 8.0**
-* **Composer**
-* **MySQL**
-* **Node.js & NPM**
-* **Git**
-* Un serveur local (**XAMPP recommandé**)
+- Git
+- Docker Desktop
+- Docker Compose
+
+### Vérification
+
+```bash
+docker --version
+docker compose version
+git --version
+```
 
 ---
 
-## 🚀 Procédure d’installation
+# 🐳 Installation de Docker
 
-### 1️⃣ Cloner le dépôt
+## Windows
+
+1. Télécharger Docker Desktop :
+https://www.docker.com/products/docker-desktop/
+
+2. Installer Docker Desktop
+
+3. Activer WSL2 lorsque demandé
+
+4. Vérifier l'installation
 
 ```bash
-git clone https://github.com/Christianregis/hfdigital.git
+docker --version
+docker compose version
+```
+
+---
+
+## Linux (Ubuntu)
+
+```bash
+sudo apt update
+
+sudo apt install docker.io docker-compose-plugin -y
+
+sudo systemctl enable docker
+
+sudo systemctl start docker
+```
+
+Ajouter votre utilisateur au groupe docker
+
+```bash
+sudo usermod -aG docker $USER
+```
+
+Puis redémarrer la session.
+
+---
+
+## macOS
+
+Télécharger Docker Desktop :
+
+https://www.docker.com/products/docker-desktop/
+
+---
+
+# 📥 Cloner le projet
+
+```bash
+git clone https://github.com/<username>/hfdigital.git
+
 cd hfdigital
 ```
 
 ---
 
-### 2️⃣ Installer les dépendances backend
+# ⚙️ Configuration
 
-```bash
-composer install
-```
-
----
-
-### 3️⃣ Configuration de l’environnement
-
-Copier le fichier d’exemple :
+Créer le fichier `.env`
 
 ```bash
 cp .env.example .env
 ```
 
-Générer la clé Laravel :
+Générer la clé Laravel
 
 ```bash
 php artisan key:generate
 ```
 
----
-
-### 4️⃣ Configuration de la base de données
-
-Modifier le fichier `.env` :
-
-```env
-DB_DATABASE=hfdigital
-DB_USERNAME=root
-DB_PASSWORD=
-```
-
-Créer la base de données `hfdigital` dans phpMyAdmin.
+> Si vous utilisez Docker uniquement, cette étape peut être réalisée depuis le conteneur.
 
 ---
 
-### 5️⃣ Migration de la base de données
+# 🚀 Lancer le projet avec Docker
+
+Construire les images
 
 ```bash
-php artisan migrate
+docker compose build
 ```
 
-(Optionnel – données de test)
+ou directement
 
 ```bash
-php artisan db:seed
+docker compose up -d --build
 ```
 
 ---
 
-### 6️⃣ Installation des dépendances frontend
+Vérifier que les conteneurs sont démarrés
 
 ```bash
-npm install
-npm run dev
+docker ps
 ```
+
+Vous devriez voir :
+
+- hfdigital_app
+- hfdigital_nginx
+- hfdigital_postgres
 
 ---
 
-### 7️⃣ Lancer l’application
+# 📦 Installer les dépendances (si nécessaire)
+
+PHP
 
 ```bash
-php artisan serve
+docker compose exec app composer install
 ```
 
-Accès via :
+JavaScript
+
+```bash
+docker compose exec app npm install
+```
+
+---
+
+# 🔑 Générer la clé Laravel
+
+```bash
+docker compose exec app php artisan key:generate
+```
+
+---
+
+# 🗄️ Exécuter les migrations
+
+```bash
+docker compose exec app php artisan migrate
+```
+
+Avec les seeders
+
+```bash
+docker compose exec app php artisan migrate --seed
+```
+
+Ou réinitialiser complètement la base
+
+```bash
+docker compose exec app php artisan migrate:fresh --seed
+```
+
+---
+
+# 🧹 Nettoyer les caches Laravel
+
+```bash
+docker compose exec app php artisan optimize:clear
+```
+
+---
+
+# 🎨 Compiler les assets
+
+Mode développement
+
+```bash
+docker compose exec app npm run dev
+```
+
+Build production
+
+```bash
+docker compose exec app npm run build
+```
+
+---
+
+# 🌐 Accéder au projet
+
+Application
 
 ```
-http://127.0.0.1:8000
+http://localhost:8080
 ```
 
 ---
 
-## 🔐 Bonnes pratiques Git
+# 📊 Base de données
 
-* Exclure `vendor/`, `node_modules/`, `.env`
-* Toujours exécuter `git pull` avant `git push`
-* Utiliser des messages de commit explicites
+PostgreSQL
 
----
-
-## 📈 Fonctionnalités actuelles
-
-* Interface web responsive
-* Gestion de contenus et services
-* Connexion à une base de données
-* Architecture prête pour l’extension
+- Host : postgres
+- Port : 5432
+- Database : hfdigital
+- Username : postgres
+- Password : password
 
 ---
 
-## 🚧 Améliorations futures
+# 🛠️ Commandes utiles
 
-* Authentification et gestion des rôles
-* Tableau de bord administrateur
-* API REST
-* Déploiement cloud
+Construire les images
+
+```bash
+docker compose build
+```
+
+Lancer les conteneurs
+
+```bash
+docker compose up -d
+```
+
+Reconstruire
+
+```bash
+docker compose up -d --build
+```
+
+Voir les conteneurs
+
+```bash
+docker ps
+```
+
+Voir les logs
+
+```bash
+docker compose logs
+```
+
+Logs d'un service
+
+```bash
+docker compose logs app
+```
+
+Entrer dans le conteneur
+
+```bash
+docker compose exec app sh
+```
+
+Arrêter les conteneurs
+
+```bash
+docker compose down
+```
+
+Supprimer les volumes
+
+```bash
+docker compose down -v
+```
 
 ---
 
-## 👤 Auteur
+# 🧪 Tests
 
-**Christian Régis CHEUKAP TATOUN**
-Développeur d’applications – Web & Mobile
+Exécuter les tests
+
+```bash
+docker compose exec app php artisan test
+```
 
 ---
 
-## 📄 Licence
+# 🔄 Pipeline CI
 
-Projet réalisé à des fins pédagogiques et professionnelles.
-Toute réutilisation doit mentio
+Le projet utilise **GitHub Actions** pour :
+
+- Installation des dépendances
+- Vérification du code
+- Exécution des migrations
+- Exécution des tests automatiques
+
+Chaque Pull Request et chaque Push déclenchent automatiquement le pipeline.
+
+---
+
+# 📌 Fonctionnalités
+
+- Authentification
+- Gestion des utilisateurs
+- Interface responsive
+- Architecture MVC Laravel
+- Gestion PostgreSQL
+- Docker Ready
+- CI/CD GitHub Actions
+
+---
+
+# 👨‍💻 Développeur
+
+**Christian Regis CHEUKAP TATOUN**
+
+Étudiant en Génie Logiciel & Développeur Full Stack
+
+GitHub : https://github.com/Christianregis
+
+---
+
+# 📄 Licence
+
+Ce projet est distribué sous licence MIT.
+
+Vous êtes libre de l'utiliser, le modifier et le redistribuer conformément aux termes de la licence.
