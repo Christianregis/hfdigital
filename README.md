@@ -370,6 +370,4 @@ GitHub : https://github.com/Christianregis
 
 # 📄 Licence
 
-Ce projet est distribué sous licence MIT.
-
 Vous êtes libre de l'utiliser, le modifier et le redistribuer conformément aux termes de la licence.
