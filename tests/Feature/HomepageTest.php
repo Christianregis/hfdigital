@@ -18,7 +18,7 @@ class HomepageTest extends TestCase
     public function test_login_credentials_return_200(): void
     {
         $response = $this->post('/login', [
-            'email' => 'user@example.com',
+            'email' => 'test@example.com',
             'password' => 'password',
         ]);
 

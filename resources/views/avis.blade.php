@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="fr">
-<<<<<<< HEAD
 
 <head>
     <meta charset="UTF-8">
@@ -563,5 +562,4 @@
     document.getElementById('openCart').setAttribute('data-count', cartCount);
   </script>
 </body>
->>>>>>> 4ab2363a34920e1e831fd0cf354750876d32af69
 </html>
